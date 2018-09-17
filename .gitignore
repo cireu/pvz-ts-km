@@ -1,0 +1,5 @@
+# Node.js with Typescript
+node_modules/
+test/
+dist/
+

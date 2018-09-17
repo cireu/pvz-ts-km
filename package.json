@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "ffi": "https://github.com/node-ffi/node-ffi.git",
+    "win32-api": "^3.5.1"
+  },
+  "devDependencies": {
+    "@types/ffi": "^0.2.0",
+    "@types/node": "^10.9.4",
+    "typescript": "^3.0.3"
+  }
+}
