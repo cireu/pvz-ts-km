@@ -1,16 +1,16 @@
 import * as tasFn from '../tas-func'
-import { TEXT } from '../../util'
+import { TEXT, xyPosToWparam } from '../../util'
 import { DModel as M, FModel, DTypes as W } from 'win32-api'
 import * as ref from 'ref'
+
 
 const tasFns = tasFn.load()
 
 export class PVZKeyMacro {
   private static singleton: PVZKeyMacro
   private scene: SCENE
-  private hwnd = {} as M.HWND; private pid = 0; private handle = {} as M.HANDLE
+  private hwnd = ref.NULL_POINTER; private pid = 0; private handle = ref.NULL_POINTER
   private constructor (gameName = 'Plants vs. Zombies', scene = SCENE.PE, resizeWindow = false) {
-    
     this.scene = scene
     
     //Find Game
@@ -47,7 +47,15 @@ export class PVZKeyMacro {
   }
 
   private leftClickAt (x: number, y: number) {
-    
+    const WM_LBUTTONDOWN = 0x201, WM_LBUTTONUP = 0x202, wparam = xyPosToWparam(x, y)
+    tasFns.PostMessageW(this.hwnd, WM_LBUTTONDOWN, 0, wparam)
+    tasFns.PostMessageW(this.hwnd, WM_LBUTTONUP, 0, wparam)
+  }
+
+  private rightClickAt (x: number, y: number) {
+    const WM_RBUTTONDOWN = 0x204, WM_RBUTTONUP = 0x205, wparam = xyPosToWparam(x, y)
+    tasFns.PostMessageW(this.hwnd, WM_RBUTTONDOWN, 0, wparam)
+    tasFns.PostMessageW(this.hwnd, WM_RBUTTONUP, 0, wparam)
   }
 }
 

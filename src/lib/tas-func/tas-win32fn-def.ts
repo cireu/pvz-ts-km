@@ -1,4 +1,4 @@
-import { DTypes as W, DModel as M, FModel } from 'win32-api'
+import { DTypes as W, DModel as M, FModel, DStruct as S } from 'win32-api'
 
 export const tasApiDef = new Map<string, FModel.DllFuncs>([['user32.dll', {
     FindWindowW: [W.HWND, [W.LPCWSTR, W.LPCWSTR]],
@@ -6,7 +6,10 @@ export const tasApiDef = new Map<string, FModel.DllFuncs>([['user32.dll', {
     GetWindowThreadProcessId: [W.DWORD, [W.HWND, W.LPDWORD]],
     SetWindowLongPtrW: [W.LONG_PTR, [W.HWND, W.INT, W.LONG_PTR]],
     GetWindowLongPtrW:[W.LONG_PTR, [W.HWND, W.INT]],
-    SetWindowPos: [W.BOOL, [W.HWND, W.HWND, W.INT, W.INT, W.INT, W.INT, W.UINT]]
+    SetWindowPos: [W.BOOL, [W.HWND, W.HWND, W.INT, W.INT, W.INT, W.INT, W.UINT]],
+    GetCursorPos: [W.BOOL, [W.LPPOINT]],
+    SetCursorPos: [W.BOOL, [W.INT, W.INT]],
+    GetWindowRect: [W.BOOL, [W.HWND, 'LPRECT']]
   }], 
     ['kernel32.dll', {
       ReadProcessMemory: [W.BOOL, [W.HANDLE, W.LPCVOID, W.LPVOID, W.SIZE_T, W.SIZE_T]],
@@ -39,4 +42,5 @@ export interface TasWin32Fns {
     size: M.SIZE_T,
     numOfBytesRead_outer: M.SIZE_T): M.BOOL
   OpenProcess(desiredAccess: M.DWORD, inheritHandle: M.BOOL, pid: M.DWORD): M.HANDLE
+  GetWindowRect(hwnd: M.HWND, lpRect: Buffer): M.BOOL
 }
