@@ -31,7 +31,7 @@ export class PVZKeyMacro {
         ~tasFn.constants.WS_THICKFRAME )
       tasFns.SetWindowLongPtrW(this.hwnd, -16, windowStyle)
       //
-      tasFns.SetWindowPos(this.hwnd, ref.NULL, 0, 0, 640, 480, (0x0002 | 0x0200 | 0x0020))
+      tasFns.SetWindowPos(this.hwnd, ref.NULL, 0, 0, 800, 600, (0x0002 | 0x0200 | 0x0020))
     }
   }
 
