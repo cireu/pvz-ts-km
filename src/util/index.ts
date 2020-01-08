@@ -3,3 +3,4 @@ export const TEXT = (text: string) => Buffer.from(text += text.endsWith('\0') ? 
 
 export const xyPosToWparam = (x: number, y: number) => (y << 16) | x
 
+// Some u
